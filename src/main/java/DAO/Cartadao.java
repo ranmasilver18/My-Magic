@@ -4,24 +4,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import MODEL.Cartamodel;
+import MODEL.CartaModel;
 
-public class Cartadao {
+public class CartaDao {
 	
 	
 	
-	public boolean CardRegister(Cartamodel magic) {
+	public boolean CardRegister(CartaModel magic) {
 		//VARIABEL QUE RECEBE A QUERY PARA ADICIONAR DADOS AO BANCO 
-		String iSQL = "INSERT INT magic"+"(CODE, NAME, CATEGORY, VALOR, QNT)"+"(?;?;?;?;?)";
+		String iSQL = "INSERT INTO magic (CODE, NAME, CATEGORY, VALOR, QNT) VALUES (?,?,?,?,?)";
 		PreparedStatement ps ;
 		
 		try {
 			ps = Dbconnection.getConnection().prepareStatement(iSQL);
-			ps.setString(2, magic.getCODE()); //TALVES SEJA 2 POR CAUSA DO AUTO INCREMENT ID
-			ps.setString(3, magic.getNAME());
-			ps.setString(4, magic.getCATEGORY());
-			ps.setString(5, magic.getVALOR());
-			ps.setString(6, magic.getQNT());
+			ps.setString(1, magic.getCODE()); //TALVES SEJA 2 POR CAUSA DO AUTO INCREMENT ID
+			ps.setString(2, magic.getNAME());
+			ps.setString(3, magic.getCATEGORY());
+			ps.setString(4, magic.getVALOR());
+			ps.setString(5, magic.getQNT());
 			ps.executeUpdate();
 			return true;
 		}catch(SQLException error){
@@ -32,19 +32,20 @@ public class Cartadao {
 	}
 	
 	
-	public boolean CardUpdate(Cartamodel magic) {
+	public boolean CardUpdate(CartaModel magic) {
 		//STRING QUE RECEBE A QUERY PARA ATUALIZAR NO BANCO DE DADOS
-		String isql = "UPDATE magic SET CODE = ?, NAME =?, CATEGORY =?, VALOR =?, QNT=? + WHERE ID=?;";
+		String isql = "UPDATE magic SET CODE = ?, NAME =?, CATEGORY =?, VALOR =?, QNT=? WHERE ID=?;";
 		
 		PreparedStatement ps;
 		//CODIGO PARA GERAR O UPDATE
 		try{
 			ps = Dbconnection.getConnection().prepareStatement(isql);
-			ps.setString(2, magic.getCODE());
-			ps.setString(3, magic.getNAME());
-			ps.setString(4, magic.getCATEGORY());
-			ps.setString(5, magic.getVALOR());
-			ps.setString(6, magic.getQNT());
+			ps.setString(1, magic.getCODE());
+			ps.setString(2, magic.getNAME());
+			ps.setString(3, magic.getCATEGORY());
+			ps.setString(4, magic.getVALOR());
+			ps.setString(5, magic.getQNT());
+			ps.setInt(6, magic.getID());
 			return true;
 		}catch(SQLException error) {
 			error.printStackTrace();
@@ -74,7 +75,7 @@ public class Cartadao {
 	}
 	
 	
-	public boolean CardUpdate(Integer ID) {
+	public CartaModel cardFindById(Integer ID) {
 		
 		//CODIGO PARA PROCURAR CARTA PELO ID DELA
 		
@@ -83,7 +84,7 @@ public class Cartadao {
 			PreparedStatement connection = Dbconnection.getConnection().prepareStatement(sql);
 			connection.setInt(1, ID);
 			ResultSet result = connection.executeQuery();
-			Cartamodel cartamodel = new Cartamodel();
+			CartaModel cartamodel = new CartaModel();
 			
 			if(result.next()) {
 				cartamodel.setID(result.getInt("ID"));
@@ -92,6 +93,7 @@ public class Cartadao {
 				cartamodel.setCATEGORY(result.getString("CATEGORY"));
 				cartamodel.setVALOR(result.getString("VALOR"));
 				cartamodel.setQNT(result.getString("QNT"));
+				return cartamodel;
 			}
 			result.close();
 			connection.close();
@@ -99,11 +101,12 @@ public class Cartadao {
 		}catch(SQLException error) {
 			error.printStackTrace();
 		}
-		return false;
+		return null;
 	}
 	
-	public ArrayList<Cartamodel> searchCards(){
+	public ArrayList<CartaModel> searchCards(){
 		
+		ArrayList<CartaModel> listCards = new ArrayList<>();
 		//ESSA CLASSE ARRAI VAI TRAZER UMA LISTA COM TODOS OS CARDS CADASTRADOS
 		try {
 			String sql = "SELECT * FROM magic;";
@@ -111,10 +114,10 @@ public class Cartadao {
 			
 			ResultSet result = connection.executeQuery();
 			
-			ArrayList<Cartamodel> listCards = new ArrayList<>();
+			
 			//CONDICIONAL PARA LISTA
 			while(result.next()) {
-				Cartamodel cartamodel = new Cartamodel();
+				CartaModel cartamodel = new CartaModel();
 				
 				cartamodel.setID(result.getInt("ID"));
 				cartamodel.setNAME(result.getString("NOME"));
@@ -132,7 +135,7 @@ public class Cartadao {
 			error.printStackTrace();
 		}
 		
-		return null;
+		return listCards;
 	}
 
 }

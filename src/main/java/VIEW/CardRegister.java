@@ -1,7 +1,7 @@
 package VIEW;
 
-import DAO.Cartadao;
-import MODEL.Cartamodel;
+import DAO.CartaDao;
+import MODEL.CartaModel;
 
 import java.io.IOException;
 
@@ -13,28 +13,29 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet(name = "CardRegister", urlPatterns = { "/register_card" })
+@WebServlet(name = "/register", urlPatterns = { "/add-produtos", "/register" })
 public class CardRegister extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/register_card");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/add-produtos");
 		dispatcher.forward(req, resp);
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		Cartamodel card = new Cartamodel();
+			
+		CartaModel card = new CartaModel();
+		
+		card.setCODE(req.getParameter("code"));
+		card.setNAME(req.getParameter("name"));
+		card.setCATEGORY(req.getParameter("category"));
+		card.setVALOR(req.getParameter("valor"));
+		card.setQNT(req.getParameter("qnt"));
 
-		card.setCODE(req.getParameter("CODE"));
-		card.setNAME(req.getParameter("NAME"));
-		card.setCATEGORY(req.getParameter("CATEGORY"));
-		card.setVALOR(req.getParameter("VALOR"));
-		card.setQNT(req.getParameter("QNT"));
-
-		Cartadao dao = new Cartadao();
+		CartaDao dao = new CartaDao();
 
 		if (dao.CardRegister(card)) {
 			req.setAttribute("magic", card);

@@ -46,10 +46,6 @@
                                 <input type="number" name="qnt" class="form-control">
                         </div>
 
-
-
-
-
                         <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
 

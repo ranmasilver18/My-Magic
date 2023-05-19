@@ -1,6 +1,6 @@
 package MODEL;
 
-public class Cartamodel {
+public class CartaModel {
 	private int ID;
 	private String CODE;
 	private String NAME;

@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.Cartadao; // CHAMAR O PACOTE DAO E A CLASSE
-import MODEL.Cartamodel;//CHAMAR O PACOTE MODEL E A CLASSE
+import DAO.CartaDao; // CHAMAR O PACOTE DAO E A CLASSE
+import MODEL.CartaModel;//CHAMAR O PACOTE MODEL E A CLASSE
 
 
 
@@ -20,7 +20,7 @@ public class CardUpdate extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		RequestDispatcher dispatcher =  getServletContext().getNamedDispatcher("/webapp/edit.produto.jsp");
+		RequestDispatcher dispatcher =  getServletContext().getNamedDispatcher("/Servlet_Project/src/main/webapp/edit-produto.jsp");
 		dispatcher.forward(req, resp);
 	}
 
@@ -28,7 +28,7 @@ public class CardUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		System.out.println("ALTERAR CARD");
-		Cartamodel card = new Cartamodel();
+		CartaModel card = new CartaModel();
 		
 		card.setCODE(req.getParameter("CODE"));
 		card.setNAME(req.getParameter("NAME"));
@@ -37,7 +37,7 @@ public class CardUpdate extends HttpServlet {
 		card.setQNT(req.getParameter("QNT"));
 		String page = "home.jsp";
 		
-		Cartadao dao = new Cartadao();
+		CartaDao dao = new CartaDao();
 		
 		if(dao.CardUpdate(card)){
 			page = "home.jsp";
