@@ -25,29 +25,6 @@
                             <label class="form-label">Codigo</label>
                             <input type="text" name= "code" class="form-control">
                         </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Nome</label>
-                            <input type="text" name="name" class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Categoria</label>
-                            <input type="text" name="categoria" class="form-control">
-                        </div>
-
-                        <div class="mb-3">
-                            <label class="form-label">Valor</label>
-                            <input type="number" name="valor" class="form-control">
-                        </div>
-
-
-                        <div class="mb-3">
-                            <label class="form-label">Quantidade</label>
-                            <input type="number" name="qnt" class="form-control">
-                        </div>
-
-
                         <button type="submit" class="btn btn-primary col-md-12">Atualizar</button>
                     </form>
 

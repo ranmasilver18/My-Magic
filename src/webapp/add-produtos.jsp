@@ -32,7 +32,7 @@
                         </div>
 
                         <div class="mb-3">
-                                <label class="form-label">Categoriay</label>
+                                <label class="form-label">Categoria</label>
                                 <input type="text" name="category" class="form-control">
                         </div>
 

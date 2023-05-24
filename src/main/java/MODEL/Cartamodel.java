@@ -12,37 +12,37 @@ public class CartaModel {
 		return ID;
 	}
 	public void setID(int iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 	public String getCODE() {
 		return CODE;
 	}
 	public void setCODE(String cODE) {
-		CODE = cODE;
+		this.CODE = cODE;
 	}
 	public String getNAME() {
 		return NAME;
 	}
 	public void setNAME(String nAME) {
-		NAME = nAME;
+		this.NAME = nAME;
 	}
 	public String getCATEGORY() {
 		return CATEGORY;
 	}
 	public void setCATEGORY(String cATEGORY) {
-		CATEGORY = cATEGORY;
+		this.CATEGORY = cATEGORY;
 	}
 	public String getVALOR() {
 		return VALOR;
 	}
 	public void setVALOR(String vALOR) {
-		VALOR = vALOR;
+		this.VALOR = vALOR;
 	}
 	public String getQNT() {
 		return QNT;
 	}
 	public void setQNT(String qNT) {
-		QNT = qNT;
+		this.QNT = qNT;
 	}
 	
 	

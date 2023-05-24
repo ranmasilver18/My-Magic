@@ -15,7 +15,7 @@ import MODEL.CartaModel;//CHAMAR O PACOTE MODEL E A CLASSE
 
 
 
-@WebServlet(name = "cardupdate", urlPatterns = {"/edit-produto"})
+@WebServlet(name = "CardUpdate", urlPatterns = { "/edit-produt.jsp", "/update" })
 public class CardUpdate extends HttpServlet {
 
 	@Override
@@ -26,21 +26,27 @@ public class CardUpdate extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-		System.out.println("ALTERAR CARD");
-		CartaModel card = new CartaModel();
+		int id = Integer.parseInt(req.getParameter("ID"));
+		String code = req.getParameter("CODE");
+        String name = req.getParameter("name");
+        String category = req.getParameter("CATEGORY");
+        String valor = req.getParameter("VALOR");
+        String qnt = req.getParameter("QNT");
 		
-		card.setCODE(req.getParameter("CODE"));
-		card.setNAME(req.getParameter("NAME"));
-		card.setCATEGORY(req.getParameter("CATEGORY"));
-		card.setVALOR(req.getParameter("VALOR"));
-		card.setQNT(req.getParameter("QNT"));
+		
+		CartaModel card = new CartaModel();
+		card.setID(id);
+		card.setCODE(code);
+		card.setNAME(name);
+		card.setCATEGORY(category);
+		card.setVALOR(valor);
+		card.setQNT(qnt);
 		String page = "home.jsp";
 		
 		CartaDao dao = new CartaDao();
 		
 		if(dao.CardUpdate(card)){
-			page = "home.jsp";
+			page = "index.jsp";
 			req.setAttribute("magic", card);
 		}else {
 			req.setAttribute("ERROR", "CARTA NAO REGISTRADA");
@@ -49,8 +55,5 @@ public class CardUpdate extends HttpServlet {
 		RequestDispatcher request = req.getRequestDispatcher(page);
 		request.forward(req, resp);
 	}
-	//private static final long serialVersionUID = 1L;
 	
-	
-
 }
