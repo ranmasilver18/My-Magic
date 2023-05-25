@@ -45,5 +45,14 @@ public class CartaModel {
 		this.QNT = qNT;
 	}
 	
+	@Override
+	public String toString() {
+		return "CartaModel [ID=" + ID + ", CODE=" + CODE + ", NAME=" + NAME + ", CATEGORY=" + CATEGORY + ", VALOR="
+				+ VALOR + ", QNT=" + QNT + "]";
+	}
+	
+	public CartaModel() {
+		super();
+	}
 	
 }

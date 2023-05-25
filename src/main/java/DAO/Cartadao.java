@@ -49,22 +49,27 @@ public class CartaDao {
 			
 		} catch (SQLException error) {
 			error.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 
-	public void CardDelete(CartaModel id) throws SQLException {
-		int result = 0;
-
-		// chama o metodo para conex
-		Connection connect = Dbconnection.getConnection();
-		PreparedStatement ps = connect.prepareStatement("DELETE FROM MAGIC WHERE ID =?"); // prepara o objeto ps com a
-																							// query
-		// seta o valor int para o user ID
-		ps.setInt(1, result);
-		result = ps.executeUpdate();// executa a query
-		connect.close();// fecha a conexão
+	public void CardDelete(CartaModel carta) throws SQLException {
+		String delete = "DELETE FROM magic WHERE ID=?;";
+		
+		try {
+			Connection cn = Dbconnection.getConnection();
+			PreparedStatement ps = cn.prepareStatement(delete);
+			ps.setInt(1, carta.getID());
+			ps.executeUpdate();
+			cn.close();
+		}catch(SQLException error) {
+			error.printStackTrace();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/*
@@ -79,6 +84,9 @@ public class CartaDao {
 	 * error.printStackTrace(); }
 	 * 
 	 * //return false; }
+	 * 
+	 * 
+	 * 
 	 */
 
 	public CartaModel cardFindById(String ID) {

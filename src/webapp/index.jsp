@@ -29,6 +29,7 @@ List<CartaModel> list = cartadao.searchCards();
 request.setAttribute("list", list);
 
 %>
+
        <table class="table">
          <thead>
            <tr>
@@ -43,6 +44,7 @@ request.setAttribute("list", list);
         
          <tbody>
           <c:forEach items="${list}" var="carta">
+          <form action="delete" method="post">
            <tr>
              <th scope="row">${carta.ID}</th>
              <td>${carta.NAME}</td>
@@ -51,13 +53,16 @@ request.setAttribute("list", list);
              <td>${carta.VALOR}</td>
              <td>${carta.QNT}</td>
              <td>
-             <a href="edit-produto.jsp?id=${carta.getID()}" class="btn-sm btn-primary" >Editar</a>
-               <a href="delete?id=${carta.getID()}" action="" class="btn-sm btn-danger ms-1">Delete</a>
+             <a href="edit-produto.jsp?id=${carta.getID()}" class="btn-sm btn-primary">Editar</a>
+             <input type="hidden" name="id" value="${carta.getID()}">
+             <button type="submit" class="btn-sm btn-danger ms-1">Delete</button></td>
              </td>
            </tr>
+            </form>
            </c:forEach>
          </tbody>
        </table>
+      
 </div>
 
 </div>
